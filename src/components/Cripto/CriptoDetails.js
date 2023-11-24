@@ -13,10 +13,14 @@ const CriptoDetails = () => {
     const [copNumber, setCopNumber] = useState(0)
      
      const handleConvertNumber =(number)=>{
-
         const quantityUSD =  parseFloat(number) * focusCripto.current_price;
-        setConvertNumber(number)
-        setCopNumber(quantityUSD * 4066.51)
+        if (isNaN(number) || number < 0) {
+            alert('Debe ingresar un valor valido');
+        } else {
+            setConvertNumber(number)
+            setCopNumber(quantityUSD * 4066.51)
+        }
+    
      }
 
     return (
@@ -42,7 +46,7 @@ const CriptoDetails = () => {
                 value={convertNumber}
             />
             <Text style={styles.titleText} >A COP :</Text>
-            <Text style={{...styles.titleSubText,marginTop: 15,}} >{handlePriceFormat(copNumber)}</Text>
+            <Text style={{...styles.titleSubText,marginTop: 15,}} >{copNumber ? handlePriceFormat(copNumber):0}</Text>
         </View>
     )
 }
